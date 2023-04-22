@@ -10,8 +10,6 @@ import java.io.IOException;
 
 public class FlowersApplication extends Application {
 
-    public static AdminModel admin = new AdminModel("ahad", "123");
-
     @Override
     public void start(Stage stage) throws IOException {
         LoginPageController loginController = new LoginPageController();
