@@ -1,7 +1,5 @@
 package com.example.demo3forsdk20;
 
-import com.example.demo3forsdk20.controller.LoginPageController;
-import com.example.demo3forsdk20.model.AdminModel;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

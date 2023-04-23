@@ -1,13 +1,15 @@
-package com.example.demo3forsdk20.controller;
+package com.example.demo3forsdk20;
 
 import com.example.demo3forsdk20.db.DatabaseConnection;
 import com.example.demo3forsdk20.view.LoginPage;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,8 +48,8 @@ public class LoginPageController {
                 if (resultSet.next()) {
                     String password = resultSet.getString("password");
                     if (password.equals(loginPage.getPasswordField().getText())) {
-                        MainPageController mainPageController = new MainPageController();
-                        goToOtherPage(mainPageController.getMainPage());
+                        FXMLLoader fxmlLoader = new FXMLLoader(LoginPageController.class.getResource("main-page.fxml"));
+                        goToOtherPage(fxmlLoader.load());
                     } else {
                         loginPage.getErrorLabel().setTextFill(Color.RED);
                         loginPage.getErrorLabel().setText("نام کاربری یا کلمه عبور اشتباه هست");
@@ -57,6 +59,8 @@ public class LoginPageController {
                     loginPage.getErrorLabel().setText("نام کاربری یا کلمه عبور اشتباه هست");
                 }
             } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
                 try {

@@ -1,14 +1,14 @@
-package com.example.demo3forsdk20.controller;
+package com.example.demo3forsdk20;
 
 import com.example.demo3forsdk20.db.DatabaseConnection;
-import com.example.demo3forsdk20.view.MainPage;
 import com.example.demo3forsdk20.view.RegisterPage;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -48,7 +48,7 @@ public class RegisterPageController {
             DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
             Connection connection = databaseConnection.getConnection();
             String sql = "INSERT INTO USER_TABLE (USERNAME, PASSWORD) VALUES (?, ?)";
-            PreparedStatement pstmt;
+            PreparedStatement pstmt = null;
             try {
                 pstmt = connection.prepareStatement(sql);
                 pstmt.setString(1, registerPage.getUserNameTextField().getText());
@@ -64,6 +64,15 @@ public class RegisterPageController {
                 alert.setContentText("خطا در ثبت نام");
                 alert.showAndWait();
             }
+            finally {
+                try {
+                    if (pstmt != null)
+                        pstmt.close();
+                    connection.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         });
     }
 
@@ -76,11 +85,23 @@ public class RegisterPageController {
     }
 
     private void goToMainPage() {
-        registerPage.getScene().getWindow().hide();
-        Stage mainStage = new Stage();
-        mainStage.setScene(new Scene(new MainPage()));
-        mainStage.setMaximized(true);
-        mainStage.show();
+        AnchorPane root = null;
+        try {
+            registerPage.getScene().getWindow().hide();
+            FXMLLoader fxmlLoader = new FXMLLoader(LoginPageController.class.getResource("main-page.fxml"));
+            Stage mainStage = new Stage();
+            mainStage.setScene(new Scene(fxmlLoader.load()));
+            mainStage.setMaximized(true);
+            mainStage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+//        registerPage.getScene().getWindow().hide();
+//        Stage mainStage = new Stage();
+//        mainStage.setScene(new Scene(new MainPage()));
+//        mainStage.setMaximized(true);
+//        mainStage.show();
     }
 
     public RegisterPage getRegisterPage() {

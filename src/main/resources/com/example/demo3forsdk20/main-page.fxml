@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo3forsdk20.MainPageController">
+    <children>
+        <Label fx:id="top_label" alignment="CENTER" layoutX="300.0" layoutY="31.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="16.0" />
+        <TabPane layoutX="209.0" layoutY="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="46.0">
+            <tabs>
+                <Tab fx:id="flower_list_tab" text="لیست گلها">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView fx:id="flower_table" layoutX="161.0" layoutY="58.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" GridPane.columnSpan="5" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                                    <columns>
+                                        <TableColumn fx:id="flower_name" text="نام گل">
+                                            <cellValueFactory>
+                                                <PropertyValueFactory property="NAME" />
+                                            </cellValueFactory>
+                                        </TableColumn>
+                                        <TableColumn fx:id="flower_type" text="نوع گل">
+                                            <cellValueFactory>
+                                                <PropertyValueFactory property="FLOWER_TYPE" />
+                                            </cellValueFactory>
+                                        </TableColumn>
+                                        <TableColumn fx:id="flower_need_light" text="نیاز به نور">
+                                            <cellValueFactory>
+                                                <PropertyValueFactory property="LIGHT_NEED" />
+                                            </cellValueFactory>
+                                        </TableColumn>
+                                        <TableColumn fx:id="flower_need_water" text="نیاز به آب در ماه">
+                                            <cellValueFactory>
+                                                <PropertyValueFactory property="WATER_NEED" />
+                                            </cellValueFactory>
+                                        </TableColumn>
+                                        <TableColumn fx:id="flower_description" text="توضیحات">
+                                            <cellValueFactory>
+                                                <PropertyValueFactory property="DESCRIPTION" />
+                                            </cellValueFactory>
+                                        </TableColumn>
+                                    </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="add_flower_tab" text="افزودن گل جدید">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox alignment="TOP_RIGHT" layoutX="39.0" layoutY="14.0" prefHeight="200.0" prefWidth="100.0" spacing="12.0" AnchorPane.bottomAnchor="64.0" AnchorPane.topAnchor="16.0">
+                           <children>
+                              <Label maxHeight="24.0" minHeight="24.0" prefHeight="24.0" text="نام گل:" />
+                              <Label maxHeight="24.0" minHeight="24.0" prefHeight="24.0" text="نوع گل:" />
+                              <Label maxHeight="24.0" minHeight="24.0" prefHeight="24.0" text="نیاز به نور:" />
+                              <Label maxHeight="24.0" minHeight="24.0" prefHeight="24.0" text="نیاز به آب:" />
+                              <Label maxHeight="24.0" minHeight="24.0" prefHeight="24.0" text="توضیحات:" />
+                           </children></VBox>
+                        <VBox layoutX="169.0" layoutY="14.0" prefHeight="200.0" prefWidth="100.0" spacing="12.0" AnchorPane.bottomAnchor="64.0" AnchorPane.topAnchor="16.0">
+                           <children>
+                              <TextField fx:id="flower_name_field" maxHeight="24.0" minHeight="24.0" prefHeight="24.0" />
+                              <TextField fx:id="flower_type_field" maxHeight="24.0" minHeight="24.0" prefHeight="24.0" />
+                              <TextField fx:id="need_light_field" maxHeight="24.0" minHeight="24.0" prefHeight="24.0" />
+                              <TextField fx:id="need_water_field" maxHeight="24.0" minHeight="24.0" prefHeight="24.0" />
+                              <TextField fx:id="description_field" maxHeight="24.0" minHeight="24.0" prefHeight="24.0" />
+                           </children></VBox>
+                        <Button fx:id="submit" layoutX="119.0" layoutY="251.0" mnemonicParsing="false" onAction="#setSubmit" prefHeight="26.0" prefWidth="124.0" text="ثبت" />
+                     </children></AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>
